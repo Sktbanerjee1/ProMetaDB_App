@@ -1,0 +1,133 @@
+{% extends "layout.html" %}
+
+<!--css-->
+{% block css %} 
+{% endblock css %}
+<!--css end-->
+
+<!--page content-->
+{% block content %}
+<div id="page-content-wrapper">
+    <div class="page-content mt-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <form method="POST" action="">
+                        {{ project_create_form.hidden_tag() }}
+                        <fieldset class="form-group">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    {{ project_create_form.project.label(class="form-control-label ml-3 text-left") }}
+                                </div>
+                                <div class="col-md-8">
+                                    {% if project_create_form.project.errors %}
+                                    {{project_create_form.project(class="form-control form-control-lg form-field is-invalid")}}
+                                    <div class="invalid-feedback text-center">
+                                        {% for error in project_create_form.project.errors %}
+                                            <span class="text-center">{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                    {% else %} 
+                                        {{project_create_form.project(class="form-control form-control-lg form-field")}}
+                                    {% endif %}
+            
+                                </div>
+                            </div>
+                        </fieldset>
+            
+                        <fieldset class="form-group">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    {{ project_create_form.label.label(class="form-control-label ml-3 text-left") }}
+                                </div>
+                                <div class="col-md-8">
+                                    {% if project_create_form.label.errors %}
+                                    {{project_create_form.label(class="form-control form-control-lg form-field is-invalid")}}
+                                    <div class="invalid-feedback text-center">
+                                        {% for error in project_create_form.label.errors %}
+                                            <span class="text-center">{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                    {% else %} 
+                                        {{project_create_form.label(class="form-control form-control-lg form-field")}}
+                                    {% endif %}
+            
+                                </div>
+                            </div>
+                        </fieldset>
+            
+                        <fieldset class="form-group">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class=" containerform-group form-buttom-div">
+                                        {{ project_create_form.submit(class="btn btn-lg btn-outline-success btn-block") }}
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="col-md-5">
+                    <hr>
+                    <h4 class="panel text-center">User projects</h5>
+                    <hr>    
+                    <section class="user-projects">
+                        <table class="table mb-0 mt-3" id="user-project-table">
+                            <thead>
+                                <tr>
+                                    <th>Project Name</th>
+                                    <th>Date Created</th>
+                                    <th>Label</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for project in user_projects %}
+                                <tr>
+                                    <td><a href="#"><span class="fa fa-folder-o" aria-hidden="true"> {{ project.project }}</span></a></td>
+                                    <td>{{ project.date_created|convertdatetime|formatdatetime}}</td>
+                                    <td>{{ project.label }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </section>        
+                </div>
+                <div class="col-md-7">
+                    <hr>
+                    <h4 class="panel text-center">All projects</h5>
+                    <hr>    
+                    <section class="user-projects">
+                        <table class="table mb-0 mt-3" id="all-project-table">
+                            <thead>
+                                <tr>
+                                    <th>Project Name</th>
+                                    <th>Date Created</th>
+                                    <th>Label</th>
+                                    <th>Owner</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for project in all_projects %}
+                                <tr>
+                                    <td> <a href="#"><span class="fa fa-folder-o" aria-hidden="true"> {{ project.project }}</span></a> </td>
+                                    <td>{{ project.date_created|convertdatetime|formatdatetime}}</td>
+                                    <td>{{ project.label }}</td>
+                                    <td>{{ project.user_id|getuserwithid }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </section>        
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+<!--page content end-->
+
+<!--js-->
+{% block js %}
+<!--table creator-->
+<script src="{{ url_for('static', filename='js/table_creator.js' ) }}"></script>
+{% endblock js %}

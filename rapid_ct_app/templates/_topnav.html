@@ -4,14 +4,25 @@
         <button id="menu-toggle" class=" mr-4 glyphicon glyphicon-align-justify btn-menu btn btn-danger toggle">
             <i class="fa fa-bars"></i>
         </button>
-        <a class="navbar-brand" href="#">RAPID-CT</a>
+        <a class="navbar-brand" href="{{ url_for('index') }}">RAPID-CT</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-                
-            </ul>
+            <div class="navbar-nav ml-auto">
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item ml-auto">
+                        <span class="navbar-text text-white mr-3 mt-1">Signed in as <strong class="nav-user">{{ current_user.username }}</strong></span>
+                        <a class="btn btn-primary btn nav-item mr-2 mb-2" href="{{ url_for('account') }}">Account</a>
+                        <a class="btn btn-danger btn nav-item mb-2" href="{{ url_for('logout') }}">Sign out</a>
+                    </li>    
+                {% else %}
+                    <li class="nav-item ml-auto">
+                        <a class="btn btn-success btn nav-item mr-2 mb-2" href="{{ url_for('login') }}">Sign in</a>
+                        <a class="btn btn-primary btn nav-item mb-2" href="{{ url_for('register') }}">Register</a>
+                    </li>
+                {% endif %}
+            </div>
         </div>
     </nav>
 </header>

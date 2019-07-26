@@ -1,5 +1,7 @@
 import secrets
 from PIL import Image
+from rapid_ct_app.models import Project
+from flask_login import current_user
 
 def save_picture(form_picture):
     random_hex = secrets.token_hex(8)
@@ -13,3 +15,10 @@ def save_picture(form_picture):
     i.save(picture_path)
 
     return picture_fn
+
+class ProjectChoicesIter(object):
+    def __iter__(self):
+        all_projects = Project.query.all()
+        for project in all_projects:
+            key_val_pair = (project.project, project.project)
+            yield key_val_pair

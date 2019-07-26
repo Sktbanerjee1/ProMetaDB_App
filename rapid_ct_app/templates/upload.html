@@ -2,7 +2,8 @@
 
 <!--css-->
 {% block css %}
-
+    {{ dropzone.load_css() }}
+    {{ dropzone.style('border: 2px dashed #0087F7; margin: 10%; min-height: 400px;') }} 
 {% endblock css %}
 <!--css end-->
 
@@ -13,7 +14,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                                        
+                    {{ dropzone.create(action='upload') }}            
                 </div>
             </div>
         </div>
@@ -24,5 +25,6 @@
 
 <!--js-->
 {% block js %}
-
+    {{ dropzone.load_js() }}
+    {{ dropzone.config() }}
 {% endblock js %}
