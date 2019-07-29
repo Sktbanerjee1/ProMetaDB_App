@@ -1,10 +1,13 @@
 import os
+from datetime import datetime
 from rapid_ct_app import app, db, bcrypt
 from rapid_ct_app.models import User, Project, File
 from flask import request, render_template, url_for, redirect, abort, jsonify, flash
-from rapid_ct_app.forms import RegistrationForm, LoginForm, UpdateAccountForm, ProjectCreateForm, FileUploadForm
+from rapid_ct_app.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from rapid_ct_app.helpers import save_picture
+from rapid_ct_app.settings import upload_path
 from flask_login import login_user, current_user, logout_user, login_required
+
 
 @app.route('/')
 @app.route('/index', methods=['GET', 'POST'])
@@ -66,42 +69,45 @@ def account():
         form.email.data = current_user.email
     image_file = url_for('static', filename='assets/profile_pics/' + current_user.image_file)
     return render_template('account.html', title='Account', image_file=image_file, form=form)
-
-
-@app.route("/projects", methods=['GET','POST'])
-@login_required
-def projects():
-    user_projects = Project.query.filter_by(user_id=current_user.id)
-    all_projects = Project.query.all()
-    form = ProjectCreateForm()
-    if form.validate_on_submit():
-        project = form.project.data
-        label = form.label.data
-        project_instance = Project(project=project, label=label, user_id=current_user.id)
-        db.session.add(project_instance)
-        db.session.commit()
-        flash(f'project created with name: {project}!', 'success')
-        return redirect(url_for('projects'))
-    return render_template('projects.html', project_create_form=form, user_projects=user_projects, all_projects=all_projects)
-
-
-
-@app.route("/upload-form")
-def upload_form():
-     return render_template('upload.html')
     
     
 @app.route('/upload', methods=['POST'])
 def handle_upload():
     for key, f in request.files.items():
         if key.startswith('file'):
-            f.save(os.path.join(app.config['UPLOADED_PATH'], f.filename))
+            user_dir_name = f'{current_user.username}'
+            user_dir_path = os.path.join(upload_path, user_dir_name)
+            
+            if os.path.exists(user_dir_path):
+                pass
+            else:
+                try:
+                    os.mkdir(user_dir_path)
+                except:
+                    print('Directory could not be created!')
+
+            user_upload = os.path.join(user_dir_path, f.filename)
+            f.save(user_upload)
+            
+            try:
+                file_instance = File(filename=f.filename, path=user_upload, uploader=current_user)
+                db.session.add(file_instance)
+                db.session.commit()
+            except:
+                raise Exception('Database entry failed')
+            
+
     return '', 204
 
         
 @app.route('/form', methods=['POST'])
 def handle_form():
-    flash('upload successful', 'success')
-    return redirect(url_for('upload_form'))
+    flash('Files added successfully!', 'success')
+    return redirect(url_for('index'))
        
-    
+
+@app.route("/user/files", methods=['GET', 'POST'])
+def uploaded_files():
+    user_upload_files = File.query.filter_by(user_id=current_user.id)
+    return render_template('user_files.html', user_upload_files=user_upload_files)
+

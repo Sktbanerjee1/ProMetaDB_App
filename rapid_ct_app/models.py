@@ -14,6 +14,7 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
     projects = db.relationship('Project', backref='owner', lazy=True)
+    files = db.relationship('File', backref='uploader', lazy=True)
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}')"
@@ -25,7 +26,7 @@ class Project(db.Model):
     project = db.Column(db.String(10), nullable=False, unique=True)
     label = db.Column(db.String(50), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    files = db.relationship('File', backref='file', lazy=True)
+    files = db.relationship('File', backref='parent-project', lazy=True)
 
     def __repr__(self):
         return f"('{self.date_created}', '{self.project}')"
@@ -35,8 +36,10 @@ class File(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     added_on = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     filename = db.Column(db.String(55), nullable=False)
-    project_id = db.Column(db.Integer, db.ForeignKey('project.id'), nullable=False)
+    path = db.Column(db.String(120), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    project_id = db.Column(db.Integer, db.ForeignKey('project.id'), nullable=False, default='NA')
     
 
     def __repr__(self):
-        return f"('{self.filename}', '{self.added_on}', '{self.project_id}')"
+        return f"('{self.filename}', '{self.added_on}', '{self.path}')"

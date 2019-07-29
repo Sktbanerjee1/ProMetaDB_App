@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+<!--css-->
+{% block css %}
+
+{% endblock css %}
+<!--css end-->
+
+<!--page content-->
+{% block content %}
+<div id="page-content-wrapper">
+    <div class="page-content mt-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <section class="user-files">
+                        <table class="table mb-0 mt-3" id="user-project-table">
+                            <thead>
+                                <tr>
+                                    <th>File Name</th>
+                                    <th>Date upload</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for file in user_upload_files %}
+                                <tr>
+                                    <td>{{ file.filename }}</td>
+                                    <td>{{ file.added_on|convertdatetime|formatdatetime}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </section>              
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+<!--page content end-->
+
+<!--js-->
+{% block js %}
+
+{% endblock js %}

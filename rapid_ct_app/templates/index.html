@@ -2,7 +2,8 @@
 
 <!--css-->
 {% block css %}
-
+    {{ dropzone.load_css() }}
+    {{ dropzone.style('border: 2px dashed #0087F7; margin: 10%; min-height: 400px;') }} 
 {% endblock css %}
 <!--css end-->
 
@@ -13,7 +14,29 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                                        
+                    <div class=upload-modal>
+                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+                        <div id="myModal" class="modal fade" role="dialog">
+                            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ url_for('handle_form') }}" enctype="multipart/form-data" method="post">
+                                        {{ dropzone.create() }}
+                                        <input type="submit" id="submit" value="Submit and Upload">
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                                </div>
+                            
+                            </div>
+                        </div>
+                    </div>                    
                 </div>
             </div>
         </div>
@@ -24,5 +47,8 @@
 
 <!--js-->
 {% block js %}
+
+    {{ dropzone.load_js() }}
+    {{ dropzone.config() }}
 
 {% endblock js %}
