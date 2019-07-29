@@ -39,4 +39,4 @@ class File(db.Model):
     
 
     def __repr__(self):
-        return f"('{self.filename}', '{self.added_on}')"
+        return f"('{self.filename}', '{self.added_on}', '{self.project_id}')"

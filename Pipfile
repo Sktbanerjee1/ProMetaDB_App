@@ -18,6 +18,7 @@ pillow = "*"
 python-social-auth = "*"
 python-secrets = "*"
 flask-sqlalchemy = "*"
+uwsgi = "*"
 
 [requires]
 python_version = "3.6"

@@ -24,11 +24,12 @@ app.config.update(
 # dropzone config
 app.config.update(
     DROPZONE_ALLOWED_FILE_CUSTOM=True,
-    DROPZONE_ALLOWED_FILE_TYPE='image/*, .pdf, .txt, .dcm, .zip, .csv, .xls',
+    DROPZONE_ALLOWED_FILE_TYPE='image/*, .pdf, .txt, .dcm, .zip, .csv, .xls, .docx',
     DROPZONE_IN_FORM=True,
     DROPZONE_UPLOAD_ON_CLICK=True,
     DROPZONE_MAX_FILE_SIZE=1024, 
     DROPZONE_MAX_FILES=20,
     DROPZONE_TIMEOUT=5 * 60 * 1000,
-    DROPZONE_UPLOAD_BTN_ID='upload-button', 
+    DROPZONE_UPLOAD_BTN_ID='submit',
+    DROPZONE_UPLOAD_ACTION='handle_upload', 
 )

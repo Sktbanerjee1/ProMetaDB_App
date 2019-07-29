@@ -1,6 +1,6 @@
 import os
 from rapid_ct_app import app, db, bcrypt
-from rapid_ct_app.models import User, Project
+from rapid_ct_app.models import User, Project, File
 from flask import request, render_template, url_for, redirect, abort, jsonify, flash
 from rapid_ct_app.forms import RegistrationForm, LoginForm, UpdateAccountForm, ProjectCreateForm, FileUploadForm
 from rapid_ct_app.helpers import save_picture
@@ -86,9 +86,22 @@ def projects():
 
 
 
-@app.route('/upload', methods=['GET','POST'])
-def upload():
-    if request.method == 'POST':
-        f = request.files.get('file')
-        f.save(os.path.join(app.config['UPLOADED_PATH'], f.filename))
-    return render_template('upload.html')
+@app.route("/upload-form")
+def upload_form():
+     return render_template('upload.html')
+    
+    
+@app.route('/upload', methods=['POST'])
+def handle_upload():
+    for key, f in request.files.items():
+        if key.startswith('file'):
+            f.save(os.path.join(app.config['UPLOADED_PATH'], f.filename))
+    return '', 204
+
+        
+@app.route('/form', methods=['POST'])
+def handle_form():
+    flash('upload successful', 'success')
+    return redirect(url_for('upload_form'))
+       
+    
