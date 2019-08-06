@@ -1,5 +1,6 @@
 import os
 from rapid_ct_app import app
+from flask_login import current_user
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 upload_path = os.path.join(basedir, 'uploads') #only for dev # change to mounted drive in prod
@@ -12,7 +13,8 @@ else:
     try:
         os.mkdir(upload_path)
     except:
-        raise Exception
+        raise Exception('Upload directory error!')
+
 
 # global config
 app.config.update(
@@ -24,12 +26,9 @@ app.config.update(
 # dropzone config
 app.config.update(
     DROPZONE_ALLOWED_FILE_CUSTOM=True,
-    DROPZONE_ALLOWED_FILE_TYPE='image/*, .pdf, .txt, .dcm, .zip, .csv, .xls, .docx',
-    DROPZONE_IN_FORM=True,
-    DROPZONE_UPLOAD_ON_CLICK=True,
+    DROPZONE_ALLOWED_FILE_TYPE='image/*, .dcm',
     DROPZONE_MAX_FILE_SIZE=1024, 
     DROPZONE_MAX_FILES=20,
     DROPZONE_TIMEOUT=5 * 60 * 1000,
-    DROPZONE_UPLOAD_BTN_ID='submit',
-    DROPZONE_UPLOAD_ACTION='handle_upload', 
+    DROPZONE_REDIRECT_VIEW='index'
 )

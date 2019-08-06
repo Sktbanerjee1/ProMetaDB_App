@@ -8,6 +8,7 @@ from flask_dropzone import Dropzone
 # app init
 app = Flask(__name__)
 
+
 # database init
 db = SQLAlchemy(app)
 
@@ -24,6 +25,7 @@ login_manager.login_message_category = 'info'
 
 # dropzone init
 dropzone = Dropzone(app)
+
 
 from rapid_ct_app import settings
 from rapid_ct_app import template_filters

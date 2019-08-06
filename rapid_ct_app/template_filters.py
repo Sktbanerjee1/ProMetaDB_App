@@ -12,7 +12,7 @@ def datetime_from_utc_to_local(utc_datetime):
 
 
 @app.template_filter('formatdatetime')
-def format_datetime(value, format="%d %b %Y %I:%M %p"):
+def format_datetime(value, format="%d/%m/%Y %H:%M"):
     """Format a date time to (Default): d Mon YYYY HH:MM P"""
     if value is None:
         return ""

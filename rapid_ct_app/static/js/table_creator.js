@@ -1,11 +1,20 @@
 $(document).ready(function () {
-    $('#user-project-table').DataTable({
+    $('#bleed-table').DataTable({
         scrollY:"350px",
     });
 } );
 
+
 $(document).ready(function () {
-    $('#all-project-table').DataTable({
+    $('#control-table').DataTable({
         scrollY:"350px",
+    });
+} );
+
+
+$(document).ready(function () {
+    $('#lesion-table').DataTable({
+        scrollY:"350px",
+        "scrollX": true
     });
 } );

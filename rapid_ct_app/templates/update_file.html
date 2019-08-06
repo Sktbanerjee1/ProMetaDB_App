@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+<!--css-->
+{% block css %}
+
+{% endblock css %}
+<!--css end-->
+
+<!--page content-->
+{% block content %}
+<div id="page-content-wrapper">
+    <div class="page-content mt-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="media content-section">
+                        <div class="media-body">
+                            <div class="file-metadata">
+                            <a class="mr-2" href="#">{{ file.uploader.username }}</a>
+                            <small class="text-muted">{{ file.added_on.strftime('%Y-%m-%d') }}</small>
+                            </div>
+                            <h2>{{ file.filename }}</h2>
+                            <form method="POST" action="">
+                                {{ form.hidden_tag() }}
+                                <fieldset class="form-group">
+                                    <div class="form-group">
+                                        {{ form.sample_type.label(class="form-control-label") }}
+                                        {% if form.sample_type.errors %}
+                                            {{ form.sample_type(class="form-control form-control-lg is-invalid") }}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.sample_type.errors %}
+                                                    <span>{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                        {% else %}
+                                            {{ form.sample_type(class="form-control form-control-lg") }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form.sample_gender.label(class="form-control-label") }}
+                                        {% if form.sample_gender.errors %}
+                                            {{ form.sample_gender(class="form-control form-control-lg is-invalid") }}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.sample_gender.errors %}
+                                                    <span>{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                        {% else %}
+                                            {{ form.sample_gender(class="form-control form-control-lg") }}
+                                        {% endif %}
+                                    </div>
+                                    
+                                </fieldset>
+                                <div class="form-group">
+                                    {{ form.submit(class="btn btn-outline-info") }}
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                                  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+<!--page content end-->
+
+<!--js-->
+{% block js %}
+
+
+{% endblock js %}

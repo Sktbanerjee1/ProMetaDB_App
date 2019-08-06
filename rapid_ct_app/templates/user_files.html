@@ -2,7 +2,7 @@
 
 <!--css-->
 {% block css %}
-
+<link rel="stylesheet" href="{{ url_for('static', filename='style/user_files/user_files.css') }}"
 {% endblock css %}
 <!--css end-->
 
@@ -13,25 +13,119 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="row">
+                        <div class="card flex-md-row mb-4 box-shadow h-md-250 col-md-7 mr-auto">
+                            <div class="card-body d-flex flex-column align-items-start">
+
+                            </div>
+                        </div>
+                        <div class="card flex-md-row mb-4 box-shadow h-md-250 col-md-5 mr-auto">
+                            <div class="card-body d-flex flex-column align-items-start">
+                                <div id="chart" class="d-flex" style="justify-content: center"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+                <div class="col-md-4">
                     <section class="user-files">
-                        <table class="table mb-0 mt-3" id="user-project-table">
-                            <thead>
-                                <tr>
-                                    <th>File Name</th>
-                                    <th>Date upload</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for file in user_upload_files %}
-                                <tr>
-                                    <td>{{ file.filename }}</td>
-                                    <td>{{ file.added_on|convertdatetime|formatdatetime}}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                        <div class="card-deck mb-3 text-center">
+                            <div class="card mb-4 box-shadow">
+                                <div class="card-header">
+                                    <h4 class="my-0 font-weight-normal text-secondary">Bleed</h4>
+                                    <strong><small class="text-center text-danger">ICH cases</small></strong>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table mb-0 mt-3" id="bleed-table">
+                                        <thead>
+                                            <tr>
+                                                <th>File Name</th>
+                                                <th>Timestamp</th>
+            
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for file in bleed %}
+                                            <tr>
+                                                <td><span>{{ file.filename }}</span></td>
+                                                <td>{{ file.added_on|convertdatetime|formatdatetime}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table> 
+                                </div>
+                            </div>
+                        </div>    
                     </section>              
                 </div>
+
+                <div class="col-md-4">
+                    <section class="user-files">
+                        <div class="card-deck mb-3 text-center">
+                            <div class="card mb-4 box-shadow">
+                                <div class="card-header">
+                                    <h4 class="my-0 font-weight-normal text-secondary">Control</h4>
+                                    <strong><small class="text-center text-danger">Normal (No visible ICH)</small></strong>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table mb-0 mt-3" id="control-table">
+                                        <thead>
+                                            <tr>
+                                                <th>File Name</th>
+                                                <th>Timestamp</th>
+            
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for file in control %}
+                                            <tr>
+                                                <td><span>{{ file.filename }}</span></td>
+                                                <td>{{ file.added_on|convertdatetime|formatdatetime}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table> 
+                                </div>
+                            </div>
+                        </div>    
+                    </section>              
+                </div>
+
+                <div class="col-md-4">
+                    <section class="user-files">
+                        <div class="card-deck mb-3 text-center">
+                            <div class="card mb-4 box-shadow">
+                                <div class="card-header">
+                                    <h4 class="my-0 font-weight-normal text-secondary">Others</h4>
+                                    <strong><small class="text-center text-danger">Calcification & Lesion</small></strong>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table mb-0 mt-3" id="lesion-table">
+                                        <thead>
+                                            <tr>
+                                                <th>File Name</th>
+                                                <th>Catagory</th>
+                                                <th>Timestamp</th>
+            
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for file in others %}
+                                            <tr>
+                                                <td>
+                                                    <span> {{ file.filename }} </span>
+                                                </td>
+                                                <td>{{ file.sample_type }}</td>
+                                                <td>{{ file.added_on|convertdatetime|formatdatetime}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table> 
+                                </div>
+                            </div>
+                        </div>    
+                    </section>              
+                </div>
+
             </div>
         </div>
     </div>
@@ -41,5 +135,9 @@
 
 <!--js-->
 {% block js %}
-
+<script>
+    var data = {{counts|tojson}};
+</script>
+<script src="{{ url_for('static', filename='js/pie_chart.js') }}"></script>
+<script src="{{ url_for('static', filename='js/table_creator.js') }}"></script>
 {% endblock js %}

@@ -1,16 +1,18 @@
 import os
 from datetime import datetime
 from rapid_ct_app import app, db, bcrypt
-from rapid_ct_app.models import User, Project, File
+from rapid_ct_app.models import User, File
 from flask import request, render_template, url_for, redirect, abort, jsonify, flash
 from rapid_ct_app.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from rapid_ct_app.helpers import save_picture
 from rapid_ct_app.settings import upload_path
 from flask_login import login_user, current_user, logout_user, login_required
-
+from flask.views import View
+from sqlalchemy import or_
 
 @app.route('/')
 @app.route('/index', methods=['GET', 'POST'])
+@login_required
 def index():
     return render_template('index.html')
 
@@ -70,44 +72,165 @@ def account():
     image_file = url_for('static', filename='assets/profile_pics/' + current_user.image_file)
     return render_template('account.html', title='Account', image_file=image_file, form=form)
     
-    
-@app.route('/upload', methods=['POST'])
-def handle_upload():
+
+       
+@app.route('/add-bleed', methods=['POST'])
+def add_bleed():
     for key, f in request.files.items():
         if key.startswith('file'):
-            user_dir_name = f'{current_user.username}'
-            user_dir_path = os.path.join(upload_path, user_dir_name)
+            filename = f.filename
+            current_username = str(current_user.username)
+            user_dir = os.path.join(upload_path, current_username)
             
-            if os.path.exists(user_dir_path):
+            if os.path.exists(user_dir):
                 pass
             else:
                 try:
-                    os.mkdir(user_dir_path)
+                    os.mkdir(user_dir)
                 except:
-                    print('Directory could not be created!')
-
-            user_upload = os.path.join(user_dir_path, f.filename)
-            f.save(user_upload)
+                    raise Exception("Could not be created! already exists!")
             
-            try:
-                file_instance = File(filename=f.filename, path=user_upload, uploader=current_user)
-                db.session.add(file_instance)
-                db.session.commit()
-            except:
-                raise Exception('Database entry failed')
-            
+            bleed_path = os.path.join(user_dir, 'ICH')
 
+            if os.path.exists(bleed_path):
+                pass
+            else:
+                try:
+                    os.mkdir(bleed_path)
+                except:
+                    raise Exception("Could not be created! already exists")
+
+            file_path = os.path.join(bleed_path, filename)
+            file_instance = File(filename=filename, path=file_path, sample_type="Bleed(ICH)", user_id=current_user.id)
+            db.session.add(file_instance)
+            db.session.commit()
+            f.save(file_path)
     return '', 204
 
-        
-@app.route('/form', methods=['POST'])
-def handle_form():
-    flash('Files added successfully!', 'success')
-    return redirect(url_for('index'))
-       
+@app.route('/add-control', methods=['POST'])
+def add_control():
+    for key, f in request.files.items():
+        if key.startswith('file'):
+            filename = f.filename
+            current_username = str(current_user.username)
+            user_dir = os.path.join(upload_path, current_username)
+            
+            if os.path.exists(user_dir):
+                pass
+            else:
+                try:
+                    os.mkdir(user_dir)
+                except:
+                    raise Exception("Could not be created! already exists!")
+            
+            control_path = os.path.join(user_dir, 'Control')
 
-@app.route("/user/files", methods=['GET', 'POST'])
-def uploaded_files():
-    user_upload_files = File.query.filter_by(user_id=current_user.id)
-    return render_template('user_files.html', user_upload_files=user_upload_files)
+            if os.path.exists(control_path):
+                pass
+            else:
+                try:
+                    os.mkdir(control_path)
+                except:
+                    raise Exception("Could not be created! already exists")
+
+            file_path = os.path.join(control_path, filename)
+            file_instance = File(filename=filename, path=file_path, sample_type="Control(Normal)", user_id=current_user.id)
+            db.session.add(file_instance)
+            db.session.commit()
+            f.save(file_path)
+    return '', 204
+
+@app.route('/add-lesion', methods=['POST'])
+def add_lesion():
+    for key, f in request.files.items():
+        if key.startswith('file'):
+            filename = f.filename
+            current_username = str(current_user.username)
+            user_dir = os.path.join(upload_path, current_username)
+            
+            if os.path.exists(user_dir):
+                pass
+            else:
+                try:
+                    os.mkdir(user_dir)
+                except:
+                    raise Exception("Could not be created! already exists!")
+            
+            lesion_path = os.path.join(user_dir, 'Lesion')
+
+            if os.path.exists(lesion_path):
+                pass
+            else:
+                try:
+                    os.mkdir(lesion_path)
+                except:
+                    raise Exception("Could not be created! already exists")
+
+            file_path = os.path.join(lesion_path, filename)
+            file_instance = File(filename=filename, path=file_path, sample_type="Lesion", user_id=current_user.id)
+            db.session.add(file_instance)
+            db.session.commit()
+            f.save(file_path)
+    return '', 204
+
+@app.route('/add-calcification', methods=['POST'])
+def add_calcification():
+    for key, f in request.files.items():
+        if key.startswith('file'):
+            filename = f.filename
+            current_username = str(current_user.username)
+            user_dir = os.path.join(upload_path, current_username)
+            
+            if os.path.exists(user_dir):
+                pass
+            else:
+                try:
+                    os.mkdir(user_dir)
+                except:
+                    raise Exception("Could not be created! already exists!")
+            
+            calcification_path = os.path.join(user_dir, 'Calcification')
+
+            if os.path.exists(calcification_path):
+                pass
+            else:
+                try:
+                    os.mkdir(calcification_path)
+                except:
+                    raise Exception("Could not be created! already exists")
+
+            file_path = os.path.join(calcification_path, filename)
+            file_instance = File(filename=filename, path=file_path, sample_type="Calcification", user_id=current_user.id)
+            db.session.add(file_instance)
+            db.session.commit()
+            f.save(file_path)
+    return '', 204
+
+
+@app.route("/files", methods=['GET', 'POST'])
+@login_required
+def user_uploaded():
+    user_bleed_files = File.query.filter_by(sample_type="Bleed(ICH)", user_id=current_user.id)
+    user_control_files = File.query.filter_by(sample_type="Control(Normal)", user_id=current_user.id)
+    user_other_files = File.query.filter(or_(File.sample_type == 'Lesion', File.sample_type == 'Calcification'))
+    bleed_num = user_bleed_files.count()
+    control_num = user_control_files.count()
+    others_num = user_other_files.count()
+    counts = [
+        {'name':"Bleed", 'value':f'{bleed_num}'},
+        {'name':"Control", 'value':f'{control_num}'},
+        {'name':"Others", 'value':f'{others_num}'}, 
+    ]
+    
+    return render_template(
+        'user_files.html',
+        bleed=user_bleed_files,
+        control=user_control_files,
+        others=user_other_files,
+        counts=counts
+        
+    )
+
+
+
 
