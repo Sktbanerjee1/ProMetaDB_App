@@ -13,8 +13,9 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-    $('#lesion-table').DataTable({
+    var datatable = $('#lesion-table').DataTable({
         scrollY:"350px",
         "scrollX": true
     });
+    
 } );
