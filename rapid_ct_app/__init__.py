@@ -12,8 +12,6 @@ app = Flask(__name__)
 # database init
 db = SQLAlchemy(app)
 
-# create database tables
-db.create_all()
 
 # bcrypt init
 bcrypt = Bcrypt(app)
