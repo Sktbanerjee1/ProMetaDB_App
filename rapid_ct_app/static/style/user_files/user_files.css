@@ -1,48 +1,24 @@
-#chart {
-  text-align: center;
-  padding-top: 50px;
+.legend {
+  font-size: 12px;
+  font-family: sans-serif;
 }
 
-.arc text {
-  font: 10px sans-serif;
-  text-anchor: middle;
+.legend rect {
+  stroke-width: 2;
 }
 
-.pieBox {
-  display: inline-block;
-  height: auto;
+.legend text {
+  fill: grey;
 }
 
-#mainTooltip {
-  position: absolute;
-  min-width: 90px;
-  height: 40px;
-  padding: 0 0 25px 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  border-radius: 50px;
-  -webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
-  pointer-events: none;
-  fill: #fff;
-  color: #fff;
-  text-anchor: middle;
-  text-align: center;
-  font-weight: bold;
-  z-index: 9999;
-}
-
-#mainTooltip:before {
-  border: solid;
-  border-color: rgba(0, 0, 0, 0.6) transparent;
-  border-width: 10px 10px 0 10px;
-  top: 100%;
-  content: "";
-  left: 43%;
-  position: absolute;
-  z-index: 99;
-}
-
-#mainTooltip.hidden {
-  display: none;
+.calheatmap {
+  width: 800px;
+  height: 200px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow-x: auto;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
 }
 /*# sourceMappingURL=user_files.css.map */

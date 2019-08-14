@@ -211,32 +211,35 @@ def add_calcification():
 @app.route("/files", methods=['GET', 'POST'])
 @login_required
 def user_uploaded():
-    user_all_files = []
+    all_files = []
     upload_dates = []
+    heatmapdata = {}
     
     file_query = File.query.filter_by(user_id = current_user.id)
     
     for item in file_query:
-        user_all_files.append(item)        
+        all_files.append(item)        
     
     
-    if len(user_all_files) == 0:
-        flash('No files have been uploaded!', 'warning')
+    if len(all_files) == 0:
+        flash('No files have been uploaded!', 'danger')
         return redirect(url_for('index'))
     else:
-        for file in user_all_files:
-            upload_dates.append(file.added_on.strftime("%d-%m-%Y")) 
+        for file in all_files:
+            timestamp = file.added_on
+            date_added = file.added_on.strftime("%d-%m-%Y")
+            upload_dates.append(date_added) 
         pass 
-     
-        unique_dates = np.unique(upload_dates)   
+    
+        unique_dates = np.unique(upload_dates)
         
-        for date in unique_dates: 
-            upload_count = File.query.filter_by(date=date).count() 
-            print(date, upload_count) 
-        
-        
-        
-        
+        for date in unique_dates:
+            date_time = datetime.strptime(date,"%d-%m-%Y")
+            timestamp = date_time.timestamp()
+            upload_count = File.query.filter_by(date=date, user_id=current_user.id).count() 
+            heatmapdata[timestamp] = upload_count
+        print(heatmapdata)
+         
         user_bleed_files = File.query.filter_by(sample_type="Bleed(ICH)", user_id=current_user.id)
         user_control_files = File.query.filter_by(sample_type="Control(Normal)", user_id=current_user.id)
         user_other_files = File.query.filter(or_(File.sample_type == 'Lesion', File.sample_type == 'Calcification'))
@@ -254,8 +257,8 @@ def user_uploaded():
             bleed=user_bleed_files,
             control=user_control_files,
             others=user_other_files,
-            counts=counts
-            
+            counts=counts,
+            heatmapdata=heatmapdata
         )
 
 

@@ -2,10 +2,11 @@ var cal = new CalHeatMap();
 var startDate = null;
 var endDate = null;
   cal.init({
-    start: new Date(2015, 0),
-    range: 10,
+    start: new Date(2019, 7),
+    range: 12,
     domain: "month",
     subDomain: "day",
+    cellSize: 15,
     data: heatmapdata,    
   onClick: function(date, nb) {
     if (startDate === null || startDate && endDate) {
@@ -25,5 +26,5 @@ var endDate = null;
     }
   }    
   });
-cal.highlight(["now", new Date(2015, 1, 15)]);
+cal.highlight(["now", new Date(2019, 1, 1)]);
 //debugger;
