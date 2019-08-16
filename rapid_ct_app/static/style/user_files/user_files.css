@@ -12,13 +12,14 @@
 }
 
 .calheatmap {
-  width: 800px;
-  height: 200px;
+  width: auto;
+  height: auto;
+  overflow: hidden;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  overflow-x: auto;
-  -ms-flex-negative: 0;
-      flex-shrink: 0;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 /*# sourceMappingURL=user_files.css.map */

@@ -10,9 +10,9 @@
 }
 
 .calheatmap {
-  width: 800px;
-  height: 200px;
+  width: auto;
+  height:auto;
+  overflow: hidden;
   display: flex;
-  overflow-x: auto;
-  flex-shrink: 0;
+  justify-content: center;
 }

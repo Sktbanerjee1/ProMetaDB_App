@@ -2,29 +2,20 @@ var cal = new CalHeatMap();
 var startDate = null;
 var endDate = null;
   cal.init({
-    start: new Date(2019, 7),
-    range: 12,
+    range: 4,
     domain: "month",
     subDomain: "day",
-    cellSize: 15,
-    data: heatmapdata,    
-  onClick: function(date, nb) {
-    if (startDate === null || startDate && endDate) {
-      startDate = date;
-      endDate = null;
-      this.highlight();
-    } else if (endDate === null) {
-      endDate = date;        
-      console.log(startDate, endDate);
-      var dates= [];
-      for (var d=startDate.getTime(); d<endDate.getTime(); d+=24*60*60*1000) {
-        dates.push(new Date(d));
-      }
-      this.highlight(dates);
-    } else {
-      
+    domainGutter: 0,
+    domainMargin: 0,
+    cellSize: 10,
+    nextSelector: "#domainDynamicDimension-next",
+    previousSelector: "#domainDynamicDimension-previous",
+    data: heatmapdata,
+    legend: [10, 15, 20, 25, 30],
+    legendColors: {
+      empty: "#DEE3DB",
+      max: "#005522"
     }
-  }    
   });
-cal.highlight(["now", new Date(2019, 1, 1)]);
+cal.highlight(["now"]);
 //debugger;

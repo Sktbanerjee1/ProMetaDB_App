@@ -44,14 +44,14 @@
 
 .sidebar-nav li {
   line-height: 40px;
-  text-indent: 20px;
+  text-indent: 0px;
 }
 
 .sidebar-nav li a {
   color: #999999;
   display: block;
   text-decoration: none;
-  padding-left: 60px;
+  padding-left: 2px;
 }
 
 .sidebar-nav li a span:before {
@@ -109,7 +109,7 @@
     left: 250px;
   }
   #wrapper.active #sidebar-wrapper {
-    left: 250px;
+    left: 0px;
     width: 250px;
     -webkit-transition: all 0.4s ease 0s;
     transition: all 0.4s ease 0s;
@@ -164,5 +164,9 @@
   position: relative;
   z-index: 9999;
   border-radius: 10px;
+}
+
+.inline {
+  display: inline;
 }
 /*# sourceMappingURL=main.css.map */

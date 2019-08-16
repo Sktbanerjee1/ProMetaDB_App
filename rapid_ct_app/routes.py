@@ -2,13 +2,13 @@ import os
 from datetime import datetime
 from rapid_ct_app import app, db, bcrypt
 from rapid_ct_app.models import User, File
-from flask import request, render_template, url_for, redirect, abort, jsonify, flash
-from rapid_ct_app.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from flask import request, render_template, url_for, redirect, abort, jsonify, flash, abort
+from rapid_ct_app.forms import RegistrationForm, LoginForm, UpdateAccountForm, UpdateFileForm
 from rapid_ct_app.helpers import save_picture
 from rapid_ct_app.settings import upload_path
 from flask_login import login_user, current_user, logout_user, login_required
 from flask.views import View
-from sqlalchemy import or_
+from sqlalchemy import or_, and_
 import numpy as np
 
 @app.route('/')
@@ -238,11 +238,10 @@ def user_uploaded():
             timestamp = date_time.timestamp()
             upload_count = File.query.filter_by(date=date, user_id=current_user.id).count() 
             heatmapdata[timestamp] = upload_count
-        print(heatmapdata)
          
         user_bleed_files = File.query.filter_by(sample_type="Bleed(ICH)", user_id=current_user.id)
         user_control_files = File.query.filter_by(sample_type="Control(Normal)", user_id=current_user.id)
-        user_other_files = File.query.filter(or_(File.sample_type == 'Lesion', File.sample_type == 'Calcification'))
+        user_other_files = File.query.filter(and_(or_(File.sample_type == 'Lesion', File.sample_type == 'Calcification')),File.user_id == current_user.id)
         bleed_num = user_bleed_files.count()
         control_num = user_control_files.count()
         others_num = user_other_files.count()
@@ -263,4 +262,41 @@ def user_uploaded():
 
 
 
+@app.route("/file/<int:file_id>", methods=['GET', 'POST'])
+@login_required
+def file(file_id):
+    file = File.query.get_or_404(file_id)
+    file_size = os.stat(file.path).st_size
+    form = UpdateFileForm()
+    form.sample_type.data = file.sample_type
+    return render_template('file.html', file=file, size=file_size, form=form)
 
+@app.route("/file/<int:file_id>/update", methods=['POST'])
+@login_required
+def file_update(file_id):
+    form = UpdateFileForm()
+    file = File.query.get_or_404(file_id)
+    if file.user_id != current_user.id:
+        flash('403 Unauthorized Method', 'danger')
+        return redirect(url_for('file', file_id=file.id))
+    else:
+        if form.validate_on_submit():
+            file.sample_type = form.sample_type.data 
+            db.session.commit()
+            flash(f'Annotation updated!', 'success')
+        return redirect(url_for('file', file_id=file.id))
+        
+
+@app.route("/file/<int:file_id>/delete", methods=['POST'])
+@login_required
+def file_delete(file_id):
+    file = File.query.get_or_404(file_id)
+    if file.user_id != current_user.id:
+        flash('403 Unauthorized Method', 'danger')
+        return redirect(url_for('file', file_id=file.id))
+    else:
+        os.remove(file.path)
+        db.session.delete(file)
+        db.session.commit()
+        flash('File deleted!', 'success')
+        return redirect(url_for('user_uploaded'))

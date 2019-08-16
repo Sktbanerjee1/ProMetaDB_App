@@ -12,7 +12,15 @@
         <div class="col-md-12">
             <div class="row">
                 <div class="card flex-md-row mb-4 box-shadow h-md-250 col-md-8 ml-auto mr-auto">
-                    <div class="card-body d-flex flex-column align-items-start">
+                    <div class="card-body d-flex flex-column align-items-center">
+                        <div class="d-inline mb-3">
+                            <span class="btn btn-outline-secondary btn-sm" id="domainDynamicDimension-previous">
+                                <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+                            </span>
+                            <span class="btn btn-outline-secondary btn-sm" id="domainDynamicDimension-next">
+                                <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                            </span>
+                        </div>
                         <div class="calheatmap" id="cal-heatmap"></div>
                     </div>
                 </div>
@@ -25,9 +33,9 @@
         </div>
 
         <div class="nav flex-column nav-pills col-md-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
-        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
-        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
+        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Bleed (ICH)</a>
+        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Control (Normal)</a>
+        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Others</a>
         </div>
         <div class="tab-content col-md-9" id="v-pills-tabContent">
         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
@@ -50,7 +58,7 @@
                                     <tbody>
                                         {% for file in bleed %}
                                         <tr>
-                                            <td><span>{{ file.filename }}</span></td>
+                                            <td><span><a href="{{ url_for('file', file_id=file.id) }}">{{ file.filename }}</a></span></td>
                                             <td>{{ file.added_on|convertdatetime|formatdatetime}}</td>
                                         </tr>
                                         {% endfor %}
@@ -80,7 +88,7 @@
                                 <tbody>
                                     {% for file in control %}
                                     <tr>
-                                        <td><span>{{ file.filename }}</span></td>
+                                        <td><span><a href="{{ url_for('file', file_id=file.id) }}">{{ file.filename }}</a></span></td>
                                         <td>{{ file.added_on|convertdatetime|formatdatetime}}</td>
                                     </tr>
                                     {% endfor %}
@@ -112,9 +120,9 @@
                                     {% for file in others %}
                                     <tr>
                                         <td>
-                                            <span> {{ file.filename }} </span>
+                                            <span><a href="{{ url_for('file', file_id=file.id) }}">{{ file.filename }}</a></span>
                                         </td>
-                                        <td>{{ file.sample_type }}</td>
+                                        <td><span>{{ file.sample_type }}</span></td>
                                         <td>{{ file.added_on|convertdatetime|formatdatetime}}</td>
                                     </tr>
                                     {% endfor %}

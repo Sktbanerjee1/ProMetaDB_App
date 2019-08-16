@@ -1,5 +1,5 @@
-var height = 250
-var width = 250
+var height = 180
+var width = 180
 var totalRadius = Math.min(width, height)/2
 var donutHoleRadius = totalRadius * 0.4
 var color = d3.scale.category10()
@@ -22,8 +22,8 @@ var path = svg
   .attr('d', arc)
   .attr('fill', (d, i) => color(d.data.name))
 
-var legendItemSize = 18
-var legendSpacing = 4
+var legendItemSize = 12
+var legendSpacing = 2
 
 var legend = svg
   .selectAll('.legend')

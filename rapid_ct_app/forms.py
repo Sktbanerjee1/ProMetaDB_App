@@ -48,3 +48,15 @@ class UpdateAccountForm(FlaskForm):
             if user:
                 raise ValidationError('That email is taken. Please choose a different one.')
 
+class UpdateFileForm(FlaskForm):
+    sample_type = SelectField(
+        validators=[DataRequired()],
+        choices=[
+            ('Bleed(ICH)', 'Bleed - Intracranial Hemorrhage '),
+            ('Control(Normal)', 'Normal -  No Intracranial Hemorrhage '),
+            ('Lesion', 'Lesion -  No Intracranial Hemorrhage '),
+            ('Calcification', 'Calcification -  No Intracranial Hemorrhage ')
+        ]
+        )
+    submit = SubmitField('Update Annotation')
+    

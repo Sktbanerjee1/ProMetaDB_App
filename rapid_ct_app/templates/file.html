@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+
+<!--css-->
+{% block css %}
+
+
+{% endblock css %}
+<!--css end-->
+
+<!--page content-->
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="jumbotron">
+            <div class="float-right inline btn-group">
+                <button type="button" class="btn btn-secondary btn-sm mb-1 mt-1" data-toggle="modal" data-target="#update">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    Update Annotation
+                </button>
+                <div class="modal fade" id="update" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close text-danger" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" action="{{ url_for('file_update', file_id=file.id) }}">
+                            {{ form.hidden_tag() }}
+                            <fieldset class="form-group">
+                                <legend class="border-bottom mb-4">Update Annotation</legend>
+                                <div class="form-group">
+                                    {{ form.sample_type.label(class="form-control-label") }}
+                                    {% if form.sample_type.errors %}
+                                        {{ form.sample_type(class="form-control form-control-lg is-invalid") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.sample_type.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{ form.sample_type(class="form-control form-control-lg", id="sample-type") }}
+                                    {% endif %}
+                                </div>
+                            </fieldset>
+                            <div class="form-group">
+                                {{ form.submit(class="btn btn-primary btn-sm") }}
+                            </div>
+                        </form>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-danger btn-sm mb-1 mt-1" data-toggle="modal" data-target="#delete">
+                    <i class="fa fa-ban" aria-hidden="true"></i>
+                    Delete File
+                </button>
+                <div class="modal fade" id="delete" role="dialog">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <span>
+                                <strong class="text-danger">
+                                    You are Deleting the file. Sure?
+                                </strong>
+                            </span>
+                        </div>
+                        <div class="modal-footer">
+                            <form action="{{ url_for('file_delete', file_id=file.id) }}" method="POST">
+                                <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+                            </form>
+                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <h3 class="mt-2">{{ file.filename }}</h3>
+            <span class="text-muted mr-auto">Size: {{ size|humansize }}</span>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+<!--page content end-->
+
+<!--js-->
+{% block js %}
+
+{% endblock js %}
