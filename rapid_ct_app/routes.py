@@ -1,10 +1,13 @@
 import os
+import io
+import pydicom
+import matplotlib.pyplot as plt
 from datetime import datetime
 from rapid_ct_app import app, db, bcrypt
 from rapid_ct_app.models import User, File
-from flask import request, render_template, url_for, redirect, abort, jsonify, flash, abort
+from flask import request, render_template, url_for, redirect, abort, jsonify, flash, abort, Response
 from rapid_ct_app.forms import RegistrationForm, LoginForm, UpdateAccountForm, UpdateFileForm
-from rapid_ct_app.helpers import save_picture
+from rapid_ct_app.helpers import save_picture, get_pixels_hu, normal_windowing
 from rapid_ct_app.settings import upload_path
 from flask_login import login_user, current_user, logout_user, login_required
 from flask.views import View
@@ -269,7 +272,13 @@ def file(file_id):
     file_size = os.stat(file.path).st_size
     form = UpdateFileForm()
     form.sample_type.data = file.sample_type
+    file_path = file.path
+    dcmfile = pydicom.dcmread(fp=file_path)
+    pixels = get_pixels_hu(dcmfile)
+    fig = plt.imshow(normal_windowing(pixels), cmap="gray")    
     return render_template('file.html', file=file, size=file_size, form=form)
+
+
 
 @app.route("/file/<int:file_id>/update", methods=['POST'])
 @login_required

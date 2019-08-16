@@ -19,7 +19,8 @@ python-social-auth = "*"
 python-secrets = "*"
 flask-sqlalchemy = "*"
 uwsgi = "*"
-medpy = "*"
+pydicom = "*"
+matplotlib = "*"
 
 [requires]
 python_version = "3.6"
