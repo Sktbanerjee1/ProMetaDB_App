@@ -21,6 +21,7 @@ flask-sqlalchemy = "*"
 uwsgi = "*"
 pydicom = "*"
 matplotlib = "*"
+flask-mail = "*"
 
 [requires]
 python_version = "3.6"

@@ -54,22 +54,21 @@
         <div id="page-content-wrapper">
             <div class="page-content mt-2">
                 <div class="container">
-                        {% with messages = get_flashed_messages(with_categories=true) %}
-                        {% if messages %}
-                            {% for category, message in messages %}
-                            <div class="alert alert-{{ category }} animated fadeIn delay-0s fadeOutUp delay-2s">
-                                <div class=" message d-inline">
-                                    <span class="text-center" style="display: inline-flex">
-                                        <i class="fa fa-info-circle fa-2x mr-2" aria-hidden="true"></i>
-                                        <span style="font-size:1.3em">{{ message }}</span>
-                                    </span>
-                                </div>
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} animated fadeIn delay-0s fadeOutUp delay-2s">
+                            <div class=" message d-inline">
+                                <span class="text-center" style="display: inline-flex">
+                                    <i class="fa fa-info-circle fa-2x mr-2" aria-hidden="true"></i>
+                                    <span style="font-size:1.3em">{{ message }}</span>
+                                </span>
                             </div>
-                            {% endfor %}
-                        {% endif %}
-                        {% endwith %}
-                    {% block content %}
-                    {% endblock %}
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    {% block content %}{% endblock %}
                 </div>
             </div>
         </div>

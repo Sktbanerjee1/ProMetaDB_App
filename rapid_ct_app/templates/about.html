@@ -1,0 +1,142 @@
+{% extends "layout.html" %}
+
+<!--css-->
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style/about/about.css') }}">
+
+<!--leaflet css-->
+<link rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+  crossorigin="">
+ 
+{% endblock css %}
+<!--css end-->
+
+<!--page content-->
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-title text-secondary text-center mt-2">About</h1>
+            <hr>
+            <div id="map" style="height: 30em"></div>
+        </div>
+    </div>
+
+    <hr>
+    <h2 class="text-secondary">Team</h2>
+    <hr>
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                <img class="mb-1 team-img" src="{{ url_for('static', filename='assets/images/DD.jpg') }}" alt="">
+            <div class="container text-center">
+                <h4>Dr. D Dash</h4>
+                <p class="title">Senior Principal Scientist</p>
+                <a class="btn btn-contact btn-primary mb-3" href="#">Contact</a>
+            </div>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <div class="d-flex mt-2" style="justify-content: center">
+                    <img class="mb-1 rounded-circle team-img" src="{{ url_for('static', filename='assets/images/AA.jpg') }}" alt="" style="width:100%">
+                </div>
+            <div class="container text-center">
+                <h4>Dr. D Dash</h4>
+                <p class="title">Senior Principal Scientist</p>
+                <a class="btn btn-contact btn-primary mb-3" href="#">Contact</a>
+            </div>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <div class="d-flex mt-2" style="justify-content: center">
+                    <img class="mb-1 rounded-circle team-img" src="{{ url_for('static', filename='assets/images/rintu.jpg') }}" alt="" style="width:100%">
+                </div> 
+            <div class="container text-center">
+                <h4>R Kutum</h4>
+                <p class="title">PhD Scholar, Computational Biology</p>
+                <a class="btn btn-contact btn-primary mb-3" href="#">Contact</a>
+            </div>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+            <img class="mb-1 team-img" src="{{ url_for('static', filename='assets/images/prateek.jpg') }}" alt="" style="width:100%">
+            <div class="container">
+                <h4>P Singh</h4>
+                <p class="title">PhD Scholar</p>
+                <a class="btn btn-contact btn-primary mb-3" href="#">Contact</a>
+            </div>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+            <img class="mb-1 team-img" src="{{ url_for('static', filename='assets/images/saikat.jpg') }}" alt="" style="width:100%">
+            <div class="container">
+                <h4>S Banerjee</h4>
+                <p class="title">Senior Research Fellow </p>
+                <a class="btn btn-contact btn-primary mb-3" href="#">Contact</a>
+            </div>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+            <img class="mb-1 team-img" src="{{ url_for('static', filename='assets/images/shadma.jpg') }}" alt="" style="width:100%">
+            <div class="container">
+                <h4>S Nafis</h4>
+                <p class="title">Junior Research Fellow </p>
+                <a class="btn btn-contact btn-primary mb-3" href="#">Contact</a>
+            </div>
+            </div>
+        </div>
+          
+
+    </div>
+    
+    <hr>
+
+    <div class="row mt-3">
+        <div class="col-md-5">
+            <img class="igib-img d-flex" src="{{ url_for('static', filename='assets/images/discovery-genomics-building.jpg') }}">
+        </div>
+        <div class="col-md-7">
+            <div class="card flex-md-row mb-4 box-shadow h-md-250">
+                <div class="card-body d-flex flex-column align-items-start">
+                    <h3 class="mb-0">
+                        <p class="text-dark">CSIR IGIB Mathura Road campus</p>
+                    </h3>
+                    <p class="card-text mb-auto">Mathura Rd, Pocket B, Sukhdev Vihar, New Delhi-110025</p>
+                    <a href="#">Phone: 011 2987 9487</a>
+                </div>
+            </div>
+
+            <div class="card flex-md-row mb-4 box-shadow h-md-250">
+                <div class="card-body d-flex flex-column align-items-start">
+                    <h3 class="mb-0">
+                        <p class="text-dark">CSIR IGIB Mall Road campus</p>
+                    </h3>
+                    <p class="card-text mb-auto">Near Jubilee Hall, Mall Road, New Delhi-110 007</p>
+                    <a href="#">Phone:011-27002200</a>
+                </div>
+            </div>
+        </div>
+    </div>  
+{% endblock content %}
+<!--page content end-->
+
+<!--js-->
+{% block js %}
+<!--leaflet js-->
+<script
+  src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+  integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+  crossorigin=""></script>
+<script src="{{ url_for('static', filename='js/map-builder.js') }}"></script>
+{% endblock js %}
