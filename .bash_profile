@@ -1,1 +1,0 @@
-export SECRET_KEY = "dh52sapox5678slae86saedsa22d6489d22skjfks45dyuw4s"
