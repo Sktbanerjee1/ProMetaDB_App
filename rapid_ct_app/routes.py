@@ -35,8 +35,8 @@ def index():
 
 
 # about
-@app.route("/about", methods=['GET', 'POST'])
-def about():
+@app.route("/contact", methods=['GET', 'POST'])
+def contact():
     return render_template('about.html')
 
 
