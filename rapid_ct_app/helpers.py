@@ -1,17 +1,13 @@
 # library imports
 import os
 import secrets
-import pydicom
-import numpy as np
 from PIL import Image
 from flask_login import current_user
-from matplotlib.figure import Figure
-from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-from flask import request
+
 
 # rapid_ct_app imports
 from rapid_ct_app import app
-from rapid_ct_app.models import File
+from rapid_ct_app.files.models import File
 from rapid_ct_app.settings import upload_path
 
 def save_picture(form_picture):
@@ -34,55 +30,13 @@ def format_datetime(value, format="%d %b %Y %I:%M %p"):
     return value.strftime(format)
 
 
-def get_pixels_hu(dcmfile):
-    arr = dcmfile.pixel_array
-    # Convert to int16 (from sometimes int16), 
-    # should be possible as values should always be low enough (<32k)
-    arr = arr.astype(np.int16)
-    # Set outside-of-scan pixels to 0
-    # The intercept is usually -1024, so air is approximately 0
-    arr[arr == -2000] = 0
-    # Convert to Hounsfield units (HU)
-    intercept = dcmfile.RescaleIntercept
-    slope = dcmfile.RescaleSlope
-    if slope != 1:
-        arr = slope * arr.astype(np.float64)
-        arr = arr.astype(np.int16)
-    arr += np.int16(intercept)
-    return np.array(arr, dtype=np.int16)
-
-
-def normal_windowing(image, MIN_BOUND=-20, MAX_BOUND=80):
-    image[image>MAX_BOUND] = MAX_BOUND
-    image[image<MIN_BOUND] = MIN_BOUND
-    return image
 
 
 
 
-def get_pixels_hu(dcmfile):
-    arr = dcmfile.pixel_array
-    # Convert to int16 (from sometimes int16), 
-    # should be possible as values should always be low enough (<32k)
-    arr = arr.astype(np.int16)
-    # Set outside-of-scan pixels to 0
-    # The intercept is usually -1024, so air is approximately 0
-    arr[arr == -2000] = 0
-    # Convert to Hounsfield units (HU)
-    intercept = dcmfile.RescaleIntercept
-    slope = dcmfile.RescaleSlope
-    if slope != 1:
-        arr = slope * arr.astype(np.float64)
-        arr = arr.astype(np.int16)
-    arr += np.int16(intercept)
-    return np.array(arr, dtype=np.int16)
 
 
-def normal_windowing(image, MIN_BOUND=-20, MAX_BOUND=80):
-#     image = (image - MIN_BOUND) / (MAX_BOUND - MIN_BOUND)
-#     image[image>1] = 1.
-#     image[image<0] = 0.
-    image[image>MAX_BOUND] = MAX_BOUND
-    image[image<MIN_BOUND] = MIN_BOUND
-    return image
+
+
+
 

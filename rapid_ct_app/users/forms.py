@@ -1,9 +1,11 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, SelectMultipleField, IntegerField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from rapid_ct_app.models import User
+from flask_login import current_user
+
+from .models import User
+
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
@@ -48,18 +50,6 @@ class UpdateAccountForm(FlaskForm):
             if user:
                 raise ValidationError('That email is taken. Please choose a different one.')
 
-class UpdateFileForm(FlaskForm):
-    sample_type = SelectField(
-        validators=[DataRequired()],
-        choices=[
-            ('Bleed(ICH)', 'Bleed - Intracranial Hemorrhage '),
-            ('Control(Normal)', 'Normal -  No Intracranial Hemorrhage '),
-            ('Lesion', 'Lesion -  No Intracranial Hemorrhage '),
-            ('Calcification', 'Calcification -  No Intracranial Hemorrhage ')
-        ]
-        )
-    submit = SubmitField('Update Annotation')
-    
 
 class RequestResetForm(FlaskForm):
     email = StringField('Email',validators=[DataRequired(), Email()])

@@ -1,7 +1,7 @@
 import time
 from datetime import datetime
 from rapid_ct_app import app
-from rapid_ct_app.models import User
+from rapid_ct_app.users.models import User
 
 
 @app.template_filter('convertdatetime')

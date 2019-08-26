@@ -2,7 +2,7 @@
     <nav class="text-center">
         <ul class="nav sidebar-nav flex-column mt-3">
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('index') }}">
+                <a class="nav-link" href="{{ url_for('main.index') }}">
                 <span>
                     Home    
                 </span>
@@ -10,7 +10,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('user_uploaded') }}">
+                <a class="nav-link" href="{{ url_for('users.user_uploaded') }}">
                 <span>
                     Uploaded Files    
                 </span>
@@ -18,9 +18,9 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('contact') }}">
+                <a class="nav-link" href="{{ url_for('main.contact') }}">
                 <span>
-                    Contact Us    
+                    Reach Us    
                 </span>
                 </a>
             </li>
