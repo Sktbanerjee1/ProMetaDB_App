@@ -31,7 +31,7 @@ app.config.update(
     DROPZONE_MAX_FILE_SIZE=1024, 
     DROPZONE_MAX_FILES=20,
     DROPZONE_TIMEOUT=5 * 60 * 1000,
-    DROPZONE_REDIRECT_VIEW='user_uploaded'
+    DROPZONE_REDIRECT_VIEW='users.user_uploaded'
 )
 
 # flask mail config
