@@ -10,51 +10,43 @@
 <!--page content-->
 {% block content %}
     <div class="row">
-        <div class="jumbotron col-md-12">
-            <div class="d-flex" style="justify-content: center">
-                <h5 class="text-muted" style="text-align: center">CSIR Institute of Genomics and Integrative Biology</h5>
-            </div>
-            <div class="d-flex mb-3" style="justify-content: center">
-                <span class="text-muted" style="font-style: italic">presents</span>
-            </div>
-            <hr>
-            <div class="d-flex mb-3" style="justify-content: center">
-                <img class="logo-img" src="{{ url_for('static', filename='assets/images/rapid-ct-logo-v3.png') }}" alt="">
-            </div>
-            <hr>
-            <h3 class="text-secondary float-left" style="text-align: center; font-weight: bold">
-                Radiological AI system for Parallel Informatic Detection of Clinical Triage emergencies.
-            </h3>
-        </div>
-
         <div class="row d-flex" style="justify-content: center">
-        <div class="card-deck mb-3 text-center">
+        <div class="card-deck col-md-12 mb-3 text-center">
             <div class="card mb-4 box-shadow">
                 <div class="card-header">
                     <h4 class="my-0 font-weight-normal">Bleed(ICH)</h4>
                 </div>
-                <div class="card-body">
+                <div class="card-body d-flex" style="justify-content: center">
                     <svg id="fillgauge1" width="100%" height="150" onclick=""></svg>
-                    <small class="text-muted">Total count</small>
                 </div>
+                <small class="text-muted text-center">
+                        Count of ICH files
+                        <br>uploaded by all users
+                </small>
             </div>
             <div class="card mb-4 box-shadow">
                 <div class="card-header">
                     <h4 class="my-0 font-weight-normal">Control</h4>
                 </div>
-                <div class="card-body">
+                <div class="card-body d-flex" style="justify-content: center">
                     <svg id="fillgauge2" width="100%" height="150" onclick=""></svg>
-                    <small class="text-muted">Total count</small>
                 </div>
+                <small class="text-muted text-center">
+                        Count of Normal files
+                        <br>uploaded by all users
+                </small>
             </div>
             <div class="card mb-4 box-shadow">
                 <div class="card-header">
                 <h4 class="my-0 font-weight-normal">Others</h4>
                 </div>
-                <div class="card-body">
+                <div class="card-body d-flex" style="justify-content: center">
                     <svg id="fillgauge3" width="100%" height="150" onclick=""></svg>
-                    <small class="text-muted">Total count</small>
                 </div>
+                <small class="text-muted text-center">
+                    Count of Calcification & Lesion files
+                    <br>uploaded by all users
+                </small>
             </div>
         </div>
         

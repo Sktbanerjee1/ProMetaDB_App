@@ -5,9 +5,13 @@ from rapid_ct_app.files.models import File
 
 main = Blueprint('main', __name__)
 
+# landing
+@main.route('/')
+def landing():
+    return render_template('landing.html')
+
 
 # index
-@main.route('/')
 @main.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
@@ -23,7 +27,7 @@ def index():
         and_(or_(File.sample_type == 'Lesion', File.sample_type == 'Calcification')),File.user_id == current_user.id
     ).count()
 
-    print(all_count, all_bleed_count, all_normal_count, all_other_files_count)
+    print(all_count)
     return render_template(
         'index.html',
         all_count=all_count,
@@ -33,7 +37,7 @@ def index():
     )
 
 
-# about
+# contact
 @main.route("/contact", methods=['GET', 'POST'])
 def contact():
     return render_template('reach-us.html')

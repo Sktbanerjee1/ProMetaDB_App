@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+<!--css-->
+{% block css %} 
+{% endblock css %}
+<!--css end-->
+
+<!--page content-->
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron mt-5x">
+                <div class="d-flex" style="justify-content: center">
+                    <h5 class="text-muted" style="text-align: center">CSIR Institute of Genomics and Integrative Biology</h5>
+                </div>
+                <div class="d-flex mb-3" style="justify-content: center">
+                    <span class="text-muted" style="font-style: italic">presents</span>
+                </div>
+                <hr>
+                <div class="d-flex mb-3" style="justify-content: center">
+                    <img class="logo-img" src="{{ url_for('static', filename='assets/images/rapid-ct-logo-v3.png') }}" alt="">
+                </div>
+                <hr>
+                <h3 class="text-secondary" style="text-align: center; font-weight: bold">
+                    Radiological AI system for Parallel Informatic Detection of Clinical Triage emergencies.
+                </h3>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+<!--page content end-->
+
+<!--js-->
+{% block js %}
+{% endblock js %}
