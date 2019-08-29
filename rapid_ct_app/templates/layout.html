@@ -22,10 +22,7 @@
 
     <!--animate-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
-    
-    <!--datatable css-->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
-    
+
     <!--cal heatmap-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/cal-heatmap/3.3.10/cal-heatmap.css">
 
@@ -44,35 +41,34 @@
 
 </head>
 <body>
-    <!--main content-->
-    <div id="wrapper">
-        <!--topnav-->
-        {% include "_topnav.html" %}
-        <!-- Sidebar -->
+
+    {% include "_topnav.html" %}
+    <div id="wrapper" class="active">
         {% include "_sidebar.html" %}
-        <!-- Page content -->
+        <!--page content-->
         <div id="page-content-wrapper">
-            <div class="page-content mt-2">
-                <div class="container">
-                    {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                        {% for category, message in messages %}
-                        <div class="alert alert-{{ category }} animated fadeIn delay-0s fadeOutUp delay-2s">
-                            <div class=" message d-inline">
-                                <span class="text-center" style="display: inline-flex">
-                                    <i class="fa fa-info-circle fa-2x mr-2" aria-hidden="true"></i>
-                                    <span style="font-size:1.3em">{{ message }}</span>
-                                </span>
-                            </div>
+            <div class="page-content inset">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} animated fadeIn delay-0.5s">
+                        <div class=" message d-inline">
+                            <span class="text-center" style="display: inline-flex">
+                                <i class="fa fa-info-circle fa-2x mr-2" aria-hidden="true"></i>
+                                <span style="font-size:1.3em">{{ message }}</span>
+                            </span>
                         </div>
-                        {% endfor %}
-                    {% endif %}
-                    {% endwith %}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+                <Div class="container mt-2">
                     {% block content %}{% endblock %}
-                </div>
+                </Div>
             </div>
         </div>
     </div>
+    
     <!--js-->
     <!--from cdn-->
     <!--jquery-->
@@ -87,14 +83,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" 
     crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.js"></script>
     <!--d3-->
     <script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
     <!--cal heatmap-->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/cal-heatmap/3.3.10/cal-heatmap.min.js"></script>
-    <!--datatable js-->
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <!--bootstrap data table-->
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
     <!--local static-->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     <!--js block-->

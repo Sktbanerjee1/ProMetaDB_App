@@ -1,29 +1,14 @@
-$(document).ready(function () {
-    $('#bleed-table').DataTable({
-        scrollY:"450px",
-        "columnDefs": [
-            {"className": "dt-center", "targets": "_all"}
-        ]
-    });
-} );
+var $table = $('#bleed-table');
+    $(function () {
+        $('#bleed-toolbar').find('select').change(function () {
+            $table.bootstrapTable('refreshOptions', {
+                exportDataType: $(this).val()
+            });
+        });
+    })
 
+var trBoldBlue = $("table");
 
-$(document).ready(function () {
-    $('#control-table').DataTable({
-        scrollY:"450px",
-        "columnDefs": [
-            {"className": "dt-center", "targets": "_all"}
-        ]
-    });
-} );
-
-
-$(document).ready(function () {
-    var datatable = $('#others-table').DataTable({
-        scrollY:"450px",
-        "columnDefs": [
-            {"className": "dt-center", "targets": "_all"}
-          ]
-    });
-    
-} );
+$(trBoldBlue).on("click", "tr", function (){
+    $(this).toggleClass("bold-blue");
+});
