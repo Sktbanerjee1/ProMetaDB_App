@@ -55,22 +55,7 @@
                                 <strong><small class="text-center text-danger">ICH cases</small></strong>
                             </div>
                             <div class="card-body">
-                                <div id="bleed-toolbar">
-                                    <select class="form-control">
-                                            <option value="">Export Basic</option>
-                                            <option value="all">Export All</option>
-                                            <option value="selected">Export Selected</option>
-                                    </select>
-                                </div>
-                                <table class="table mb-0 mt-3 cell-border" 
-                                id="bleed-table"
-                                data-toggle="bleed-table"
-                                data-search="true"
-                                data-filter-control="true" 
-                                data-show-export="true"
-                                data-click-to-select="true"
-                                data-toolbar="#bleed-toolbar"
-                                class="table-responsive">
+                                <table class="table table-striped table-bordered mb-0 mt-3 cell-border" id="bleed-table">
                                     <thead>
                                         <tr>
                                             <th>File Name</th>
@@ -81,7 +66,6 @@
                                     <tbody>
                                         {% for file in bleed %}
                                         <tr>
-                                                <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
                                             <td><span><a href="{{ url_for('files.file', file_id=file.id) }}">{{ file.filename }}</a></span></td>
                                             <td>{{ file.added_on|convertdatetime|formatdatetime}}</td>
                                         </tr>
@@ -102,7 +86,7 @@
                             <strong><small class="text-center text-danger">Normal (No visible ICH)</small></strong>
                         </div>
                         <div class="card-body">
-                            <table class="table mb-0 mt-3 cell-border" id="control-table">
+                            <table class="table mb-0 mt-3 cell-border table-striped table-bordered" id="control-table">
                                 <thead>
                                     <tr>
                                         <th>File Name</th>
@@ -132,7 +116,7 @@
                             <strong><small class="text-center text-danger">Calcification & Lesion</small></strong>
                         </div>
                         <div class="card-body">
-                            <table class="table mb-0 mt-3 cell-border" id="others-table">
+                            <table class="table mb-0 mt-3 cell-border table-striped table-bordered" id="others-table">
                                 <thead>
                                     <tr>
                                         <th>File Name</th>

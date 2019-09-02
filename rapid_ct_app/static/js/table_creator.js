@@ -1,14 +1,22 @@
-var $table = $('#bleed-table');
-    $(function () {
-        $('#bleed-toolbar').find('select').change(function () {
-            $table.bootstrapTable('refreshOptions', {
-                exportDataType: $(this).val()
-            });
-        });
-    })
+$(document).ready(function() {
+    $('#bleed-table').DataTable({
+        "scrollY": "400px",
+        "scrollCollapse": true,
+    });
+} );
 
-var trBoldBlue = $("table");
 
-$(trBoldBlue).on("click", "tr", function (){
-    $(this).toggleClass("bold-blue");
-});
+$(document).ready(function() {
+    $('#control-table').DataTable({
+        "scrollY": "400px",
+        "scrollCollapse": true,
+    });
+} );
+
+
+$(document).ready(function() {
+    $('#others-table').DataTable({
+        "scrollY": "400px",
+        "scrollCollapse": true,
+    });
+} );
