@@ -13,8 +13,8 @@ config_info.circleColor = "#51a821"
 config_info.textColor = "#1E5200"
 config_info.waveTextColor = "#51a821"
 config_info.waveColor = "#91EE5F"
-config_info.waveRiseTime = 40;
-config_info.waveAnimateTime = 6000;
+config_info.waveRiseTime = 20;
+config_info.waveAnimateTime = 3000;
 
 
 
@@ -24,8 +24,8 @@ config_warning.waveTextColor = "#f7bf1e"
 config_warning.waveColor = "#ffe9a8"
 //config_warning.warningThreshold = .4;
 //config_warning.waveCount = 2;
-config_warning.waveRiseTime = 40;
-config_warning.waveAnimateTime = 6000;
+config_warning.waveRiseTime = 20;
+config_warning.waveAnimateTime = 3000;
 
 config_danger.circleColor = "#f7321e"
 config_danger.textColor = "#4f0a03"
@@ -33,8 +33,8 @@ config_danger.waveTextColor = "#f7321e"
 config_danger.waveColor = "#fedbd8"
 //config_danger.dangerThreshold = .2;
 //config_danger.waveCount = 3;
-config_danger.waveRiseTime = 40;
-config_danger.waveAnimateTime = 6000;
+config_danger.waveRiseTime = 20;
+config_danger.waveAnimateTime = 3000;
 //config_danger.waveHeight = 0.15;
 
 
