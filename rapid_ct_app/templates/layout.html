@@ -51,33 +51,25 @@
 <body>
 
     {% include "_topnav.html" %}
-    <div id="wrapper" class="active">
-        {% include "_sidebar.html" %}
-        <!--page content-->
-        <div id="page-content-wrapper">
-            <div class="page-content inset">
-                <div class="container" style="width: 50%">
-                    {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                        {% for category, message in messages %}
-                        <div class="alert alert-{{ category }} animated fadeIn delay-0.5s">
-                            <div class=" message d-inline">
-                                <span class="text-center" style="display: inline-flex">
-                                    <i class="fa fa-info-circle fa-2x mr-2" aria-hidden="true"></i>
-                                    <span style="font-size:1.3em">{{ message }}</span>
-                                </span>
-                            </div>
+            <div class="container">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} animated fadeIn delay-0.5s">
+                        <div class=" message d-inline">
+                            <span class="text-center" style="display: inline-flex">
+                                <i class="fa fa-info-circle fa-2x mr-2" aria-hidden="true"></i>
+                                <span style="font-size:1.3em">{{ message }}</span>
+                            </span>
                         </div>
-                        {% endfor %}
-                    {% endif %}
-                    {% endwith %}
-                </div>
-                <Div class="container mt-2">
-                    {% block content %}{% endblock %}
-                </Div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
             </div>
-        </div>
-    </div>
+            <div class="container mt-4">
+                {% block content %}{% endblock %}
+            </div>
     
     <!--js-->
     <!--from cdn-->

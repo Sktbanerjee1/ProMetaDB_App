@@ -1,6 +1,6 @@
-.igib-img {
-  max-width: 29em;
-  max-height: 20em;
+.igib-img{
+    max-width: 15em;
+    max-height: 15em;
 }
 
 .column {
@@ -20,8 +20,7 @@
 
 /* Add some shadows to create a card effect */
 .card {
-  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 /* Some left and right padding inside the container */
@@ -54,8 +53,7 @@
   background-color: #555;
 }
 
-.team-img {
-  height: 12em;
-  width: 12em;
+.team-img{
+height: 12em;
+width: 12em;
 }
-/*# sourceMappingURL=about.css.map */
