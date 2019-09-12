@@ -1,6 +1,38 @@
+.background {
+  position: fixed;
+  z-index: -999;
+  overflow: hidden;
+  max-width: 95%;
+  max-height: 95%;
+}
+
+.land-jmt {
+  background-color: rgba(9, 255, 0, 0.219);
+}
+
+#content {
+  position: absolute;
+  z-index: 1;
+}
+
+.ball {
+  position: fixed;
+  border-radius: 100%;
+  opacity: 0.5;
+}
+
 .logo {
   max-width: 100px;
   max-height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+  height: auto;
+}
+
+.logo-telrad {
+  max-width: 150px;
+  max-height: 150px;
   margin-left: auto;
   margin-right: auto;
   width: auto;
@@ -13,11 +45,12 @@
 }
 
 footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   height: 80px;
   -ms-flex-negative: none;
       flex-shrink: none;
+  z-index: 1;
 }
 
 .nav-img {
@@ -60,7 +93,7 @@ footer {
 }
 
 .jumbotron {
-  background-color: rgba(156, 156, 156, 0.158);
+  background-color: #9c9c9c;
 }
 
 .alert {
@@ -74,7 +107,7 @@ footer {
 }
 
 .jumbotron {
-  background-color: rgba(170, 170, 170, 0.219);
+  background-color: rgba(236, 236, 236, 0.767);
 }
 
 .page-title {
@@ -83,6 +116,7 @@ footer {
   font-weight: bold;
   height: 1.5em;
   padding: 4px;
+  z-index: 1;
 }
 
 .alert {

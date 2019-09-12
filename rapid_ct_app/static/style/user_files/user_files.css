@@ -1,16 +1,3 @@
-.legend {
-  font-size: 12px;
-  font-family: sans-serif;
-}
-
-.legend rect {
-  stroke-width: 2;
-}
-
-.legend text {
-  fill: grey;
-}
-
 .calheatmap {
   width: auto;
   height: auto;

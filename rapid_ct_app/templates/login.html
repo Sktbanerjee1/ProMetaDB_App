@@ -8,6 +8,10 @@
 <!--page content-->
 {% block content %}
     <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-title text-secondary text-center mt-2">Log In</h1>
+            <hr>
+        </div>
         <div class="col-md-12 content-section">
             <form method="POST" action="">
                 {{ form.hidden_tag() }}
@@ -56,10 +60,12 @@
                 </small>
             </div>  
         </div>
+        <canvas class="background" id="background"></canvas>
     </div>
 {% endblock content %}
 <!--page content end-->
 
 <!--js-->
 {% block js %}
+<script src="{{ url_for('static', filename='js/background.js') }}"></script>
 {% endblock js %}

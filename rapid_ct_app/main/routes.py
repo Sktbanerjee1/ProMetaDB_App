@@ -27,7 +27,6 @@ def index():
         and_(or_(File.sample_type == 'Lesion', File.sample_type == 'Calcification')),File.user_id == current_user.id
     ).count()
 
-    print(all_count)
     return render_template(
         'index.html',
         all_count=all_count,

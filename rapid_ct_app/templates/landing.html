@@ -9,11 +9,11 @@
 {% block content %}
     <div class="row">
         <div class="col-md-12">
-            <div class="jumbotron mt-3 shadow p-3 mb-5 rounded">
+            <div class="jumbotron land-jmt mt-3 shadow p-3 mb-5 rounded">
                 <div class="logos">
                     <img class="logo mb-2 d-flex" src="{{ url_for('static', filename='assets/images/igib.png') }}" alt="">
                     <p class="text-secondary text-center">&</p>
-                    <img class="logo mb-2 d-flex" src="{{ url_for('static', filename='assets/images/tel-rad.png') }}" alt="">
+                    <img class="logo-telrad mb-2 d-flex" src="{{ url_for('static', filename='assets/images/tel-rad.png') }}" alt="">
                 </div>
                 <div class="d-flex mb-3" style="justify-content: center">
                     <span class="text-muted" style="font-style: italic">presents</span>
@@ -21,7 +21,7 @@
                 <hr>
                 <hr>
                 <div class="d-flex mb-3" style="justify-content: center">
-                    <img class="logo-img" src="{{ url_for('static', filename='assets/images/rapid-ct-logo-v3.png') }}" alt="">
+                    <img class="logo-img" src="{{ url_for('static', filename='assets/images/rapid-ct-logo-v6.png') }}" alt="">
                 </div>
                 <hr>
                 <hr>
@@ -32,6 +32,7 @@
                     <a class="btn btn-lg btn-success" href="{{ url_for('main.index') }}">Dive In</a>
                 </div>
             </div>
+            <canvas class="background" id="background"></canvas>
         </div>
     </div>
 {% endblock content %}
@@ -39,4 +40,5 @@
 
 <!--js-->
 {% block js %}
+<script src="{{ url_for('static', filename='js/background.js') }}"></script>
 {% endblock js %}
