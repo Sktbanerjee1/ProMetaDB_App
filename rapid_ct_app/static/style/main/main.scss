@@ -1,24 +1,10 @@
-.background {
-  position: fixed;
-  z-index: -999;
-  overflow: hidden;
-  max-width: 95%;
-  max-height: 95%;
-}
-
 .land-jmt {
   background-color: rgba(9, 255, 0, 0.219);
 }
 
 #content{
   position: absolute;
-  z-index: 1;
-}
-
-.ball {
-  position: fixed;
-  border-radius: 100%;
-  opacity: 0.5;
+  
 }
 
 .logo{
